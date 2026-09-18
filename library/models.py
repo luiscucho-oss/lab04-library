@@ -61,9 +61,24 @@ class Book(models.Model):
     cover = models.ImageField(upload_to='covers/', blank=True, null=True)
     language = models.CharField(max_length=50, default='Español')
     publication_date = models.DateField()
+    categories = models.ManyToManyField(Category, related_name='books', blank=True)
+    publishers = models.ManyToManyField(Publisher, through='Publication', related_name='books')
 
     class Meta:
         ordering = ['title']
 
     def __str__(self):
         return self.title
+
+
+class Publication(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
+    publication_date = models.DateField()
+    edition = models.CharField(max_length=50)
+
+    class Meta:
+        unique_together = ('book', 'publisher')
+
+    def __str__(self):
+        return f'{self.book} - {self.publisher} ({self.edition})'
