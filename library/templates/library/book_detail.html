@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }} - Biblioteca</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .section { border: 1px solid #ddd; padding: 15px; margin: 15px 0; border-radius: 5px; background: #f9f9f9; }
+        .section h3 { margin-top: 0; color: #333; }
+        .field { margin: 5px 0; }
+        .label { font-weight: bold; }
+        a { color: #0066cc; }
+        .back { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+
+    <div class="section">
+        <h3>Informacion del Libro</h3>
+        <div class="field"><span class="label">ISBN:</span> {{ book.isbn }}</div>
+        <div class="field"><span class="label">Paginas:</span> {{ book.pages }}</div>
+        <div class="field"><span class="label">Idioma:</span> {{ book.language }}</div>
+        <div class="field"><span class="label">Fecha de publicacion:</span> {{ book.publication_date }}</div>
+    </div>
+
+    <div class="section">
+        <h3>Autor</h3>
+        <div class="field"><span class="label">Nombre:</span> {{ book.author.first_name }} {{ book.author.last_name }}</div>
+        <div class="field"><span class="label">Email:</span> {{ book.author.email }}</div>
+        <div class="field"><span class="label">Biografia:</span> {{ book.author.bio }}</div>
+        <div class="field"><span class="label">Fecha de nacimiento:</span> {{ book.author.date_of_birth }}</div>
+        {% if book.author.profile %}
+        <div class="field"><span class="label">Lugar de nacimiento:</span> {{ book.author.profile.birth_place }}</div>
+        <div class="field"><span class="label">Biografia completa:</span> {{ book.author.profile.biography }}</div>
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h3>Categorias</h3>
+        {% for cat in book.categories.all %}
+            <span>{{ cat.name }}{% if cat.description %} - {{ cat.description }}{% endif %}</span>{% if not forloop.last %}<br>{% endif %}
+        {% empty %}
+            <p>Sin categorias asignadas.</p>
+        {% endfor %}
+    </div>
+
+    <div class="section">
+        <h3>Editorial(es)</h3>
+        {% for pub in book.publication_set.all %}
+            <div class="field">
+                <span class="label">{{ pub.publisher.name }}</span> - {{ pub.edition }} ({{ pub.publication_date }})
+                <br><small>{{ pub.publisher.address }}, {{ pub.publisher.city }}</small>
+                {% if pub.publisher.website %}<br><small>{{ pub.publisher.website }}</small>{% endif %}
+            </div>
+        {% empty %}
+            <p>Sin editorial asignada.</p>
+        {% endfor %}
+    </div>
+
+    <div class="back">
+        <a href="{% url 'library:book_list' %}">&larr; Volver al catalogo</a>
+    </div>
+</body>
+</html>
