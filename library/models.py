@@ -42,6 +42,7 @@ class Author(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
     isbn = models.CharField(max_length=13, unique=True)
     pages = models.PositiveIntegerField()
     cover = models.ImageField(upload_to='covers/', blank=True, null=True)
