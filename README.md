@@ -56,13 +56,17 @@ Proyecto de laboratorio que implementa un sistema de gestion de biblioteca utili
 ## Capturas de Pantalla
 
 ### Panel de Administrador
-![Panel de Admin](screenshots/admin_panel.png)
+<img width="1888" height="908" alt="Captura de pantalla 2026-09-17 212806" src="https://github.com/user-attachments/assets/23f1c1a7-0e43-4ba9-ad8b-a3bfbbce85b8" />
+
 
 ### Lista de Libros
-![Lista de Libros](screenshots/book_list.png)
+<img width="1579" height="948" alt="Captura de pantalla 2026-09-17 213206" src="https://github.com/user-attachments/assets/21ebfe53-1c80-48ca-ae2e-d945d02d7eef" />
+
 
 ### Detalle de Libro con Datos Relacionados
-![Detalle de Libro](screenshots/book_detail.png)
+
+<img width="1857" height="946" alt="Captura de pantalla 2026-09-17 213032" src="https://github.com/user-attachments/assets/14546ad2-30c5-4b0b-9732-b30d0bca3325" />
+
 
 ## Instalacion
 
