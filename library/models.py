@@ -40,6 +40,19 @@ class Author(models.Model):
         return f'{self.first_name} {self.last_name}'
 
 
+class AuthorProfile(models.Model):
+    author = models.OneToOneField(Author, on_delete=models.CASCADE, related_name='profile')
+    biography = models.TextField(blank=True)
+    birth_place = models.CharField(max_length=100, blank=True)
+    photo = models.ImageField(upload_to='authors/', blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'author profiles'
+
+    def __str__(self):
+        return f'Perfil de {self.author}'
+
+
 class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
